@@ -1,6 +1,7 @@
 module.exports = function() {
 	return {
 		name: 'changelog',
+		enabled:false,
 		path: 'admin',
 		context: {
 			type: 'admin',

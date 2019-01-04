@@ -30,11 +30,10 @@ body {
 }
 
 header {
-    background: white;
+    background-color: #001f3f;
     padding-top: 10px;
     padding-bottom: 10px;
     min-height: 50px;
-    border-bottom: 5px solid #dbe9e2;
 }
 
 .contactInfo a {
@@ -132,14 +131,40 @@ form>button[disabled],
     color: white;
 }
 
-.btn {
-    margin-top: 10px;
+
+.mx-auto{
+    display:block;
+    margin-left:auto!important;
+    margin-right:auto!important;
+}
+
+.mt-1{
+    margin-top:5px!important;
+}
+.mt-2{
+    margin-top:10px!important;
+}
+.mt-3{
+    margin-top:15px!important;
+}
+.mt-4{
+    margin-top:20px!important;
+}
+.mt-5{
+    margin-top:25px!important;
+}
+
+
+
+.btn, button {
+    border-radius: 5px;
     border: 0px;
-    background-color: darkslateblue;
+    background-color: #001f3f;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 18px;
     color: white;
     cursor: pointer;
+    text-decoration: none;
 }
 
 
@@ -207,6 +232,18 @@ form>button:active,
     font-weight: bold !important;
 }
 
+.CTAButtons{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+.CTAButtons a{
+    max-width:200px;
+    text-align: center;
+    font-size:25px;
+}
+
 
 .developmentPage {
     padding: 20px 10px;
@@ -218,7 +255,7 @@ form>button:active,
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e0cfcf;
+    background-color: #f0eded;
     padding: 20px;
     /* margin-bottom: 20px; */
 }
@@ -258,6 +295,11 @@ form>button:active,
     color: black;
     font-size: 14px;
     margin-bottom: 10px;
+}
+
+.ClientLoginForm{
+    max-width:400px;
+    margin:0 auto;
 }
 
 .adminProgramacionItemImage {
@@ -321,7 +363,7 @@ footer ul.menu>li.socialIcons:hover>a {
 }
 
 ul.menu>li:hover>a {
-    color: black;
+    opacity:0.7;
 }
 
 .subMenu li:hover>a {
@@ -362,7 +404,7 @@ ul.menu>li {
 
 ul.menu>li>a {
     font-size: 14px;
-    color: #333;
+    color: white;
     text-decoration: none;
     font-family: sans-serif;
     margin: 0 auto;
@@ -407,6 +449,14 @@ section .image-title h2 {
     color: white;
 }
 
+.form{
+    padding:5px;
+}
+.form label{
+    margin-top:10px;
+    display:block;
+}
+
 .form .blockChilds {
     margin-bottom: 5px;
 }
@@ -428,14 +478,19 @@ article .text {
     color: grey;
 }
 
+
+.fb-icon{
+    color:#3b5998;
+}
+
 footer ul.menu>li.socialIcons>a {
     display: inline-block;
     width: 25px;
 }
 
 footer ul.menu>li>a {
-    font-size: 14px;
-    color: #569b56;
+    font-size: 20px;
+    color: #001f3f;
     text-decoration: none;
     font-weight: bold;
 }
@@ -521,17 +576,21 @@ a.logout {
     padding: 0px 10px;
 }
 
-.admin_login>div>* {
+.form>div {
+    width: 100%;
+}
+.form>div>* {
     width: 100%;
 }
 
-.admin_login input {
+.form input {
     border: 0px;
-    border-bottom: 2px solid grey;
+    border-bottom: 1px solid #001f3f;
+    border-radius: 0px;
 }
 
-.admin_login input:focus,
-.admin_login input:active {
+.form input:focus,
+.form input:active {
     outline: 0px;
     box-shadow: none;
 }
@@ -686,6 +745,25 @@ iframe {
 
 }
 @media only screen and (min-width: 992px) {
+    
+    .ClientLoginForm{
+        display:flex;
+        flex-direction: column;
+        min-height: 200px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form{
+        padding:30px;
+    }
+    .form label{
+
+    }
+    .CTAButtons{
+        margin: 0 auto;
+        max-width: 400px;
+    }
     .iiLogoWrapper {
         margin-left: 15px;
         flex-basis: 70%;
@@ -726,6 +804,10 @@ iframe {
     .desktopSplitTwo>div {
         flex-basis: 100%;
     }
+    
+    .pt-5{
+        padding-top:25px!important;
+    }
 
     .desktopSplitTwo {
         display: flex;
@@ -744,7 +826,7 @@ iframe {
 
     .photoQuote {
         font-size: 20px;
-        text-align: justify;
+        text-align: center;
     }
 
 
@@ -881,10 +963,11 @@ iframe {
         justify-content: flex-end;
         align-items: center;
         margin-top: 50px;
+        padding:30px;
     }
 
     .mainContent {
-        min-height: calc(100vh - 156px);
+        min-height: calc(100vh - 300px);
     }
 
     header {
@@ -1014,8 +1097,3 @@ iframe {
     text-align: center;
 }
 
-.mx-auto{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-}

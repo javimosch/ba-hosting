@@ -1,13 +1,3 @@
-# Eutopia - Ecoaldea
+### How to run
 
-# Access
-
-- ecoaldea.incubadoraitinerante.com
-- eutopiaecoaldea.com
-
-# Development
-
-- develop locally
-- push changes to heroku branch
-- Heroku will fetch the heroku branch, deploy master (site generation) and serve the site. (stagging enviroment.)
-- changes mades from backoffice will trigger a push to heroku branch to fire all again (via heroku instance).
+pm2 start "yarn start" --name "bahosting" --log pm2.log

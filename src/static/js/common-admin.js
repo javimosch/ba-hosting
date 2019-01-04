@@ -30,38 +30,7 @@ function showNoty(text, timeout, killer, type) {
 	new Noty(opts).show();
 }
 
-function apiGet(uri) {
-	return new Promise((resolve, reject) => {
-		fetch(`${SERVER.API_URL}${uri}`).then(r => r.json().then(response => {
-			resolve(response);
-		})).catch(err => {
-			resolve({
-				err,
-				result: null
-			});
-		});
-	});
-}
 
-function apiPost(uri, data) {
-	return new Promise((resolve, reject) => {
-		$.ajax({
-			url: `${SERVER.API_URL}${uri}`,
-			data: JSON.stringify(data),
-			contentType: "application/json; charset=utf-8",
-			type: 'POST',
-			error: () => {
-				return resolve({
-					err: true,
-					result: null
-				})
-			},
-			success: (data) => {
-				return resolve(data)
-			}
-		});
-	})
-}
 
 (function init() {
 	var el = document.querySelector('body');

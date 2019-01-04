@@ -7,10 +7,10 @@ var locales = require('./locales.js');
 var self = module.exports = {
 	defaultOutputFolder: 'docs',
 	NODE_ENV: process.env.NODE_ENV,
-	defaultLanguage: 'es',
+	defaultLanguage: 'en',
 	context: {
-		defaultCurrentPage: 'page_ecoaldea',
-		currentPage: 'page_ecoaldea',
+		defaultCurrentPage: 'page_homepage',
+		currentPage: 'page_homepage',
 		NODE_ENV: process.env.NODE_ENV,
 		API_URL: process.env.API_URL
 	},

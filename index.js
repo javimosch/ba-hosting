@@ -1,3 +1,6 @@
+require('dotenv').config({
+    silent: true
+});
 const outputFolder = require('path').join(process.cwd(), 'docs');
 const moment = require('moment-timezone');
 const argv = require('yargs').argv;
@@ -72,12 +75,12 @@ function compileEntireSite() {
 
     //Generate site
     compileSiteOnce({
-        language: 'es'
+        language: 'en'
     });
     if (process.env.DISABLE_I18N !== '1') {
         compileSiteOnce({
-            language: 'en',
-            outputFolder: 'docs/en'
+            language: 'es',
+            outputFolder: 'docs/es'
         });
         compileSiteOnce({
             language: 'fr',
@@ -122,6 +125,9 @@ function loadHandlebarHelpers() {
     H.registerHelpers(Handlebars);
 
 
+    Handlebars.registerHelper('random', function(options) {
+        return Math.random();
+    });
 
     Handlebars.registerHelper('bold', function(options) {
         return new Handlebars.SafeString(
@@ -182,6 +188,10 @@ function loadHandlebarHelpers() {
         }
     });
     Handlebars.registerHelper('pagePath', function(langPath, name, options) {
+        if (!name) {
+            console.error('HBS pagePath no name supplied')
+            return '';
+        }
         name = name.split(' ').join('-')
         name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         name = name.toLowerCase();

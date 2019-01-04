@@ -1,17 +1,15 @@
 module.exports = function() {
 	return {
-		name: 'faq',
-		path: 'admin',
-		enabled:false,
+		name: 'client-area',
+		enabled:true,
+		path: '',
 		context: {
-			type: 'admin',
 			init: function init() {
 				new Vue({
-					el: '.admin',
-					name: 'adminFaq',
+					el: '.container',
+					name: 'clientLogin',
 					data() {
 						return {
-							
 						}
 					},
 					created() {
@@ -22,9 +20,6 @@ module.exports = function() {
 						
 					}
 				});
-
-
-
 			}
 		}
 	}

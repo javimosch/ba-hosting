@@ -4,6 +4,7 @@ const Handlebars = require('handlebars');
 const dJSON = require('dirty-json');
 const reload = require('require-reload')(require);
 
+
 module.exports = {
 	compile: (options, config) => {
 		var srcPath = path.join(process.cwd(), 'src');
@@ -43,6 +44,10 @@ module.exports = {
 				return console.error('pages: config file missing at', pageConfigPath, {
 					details: err.stack
 				});
+			}
+			
+			if(!pageConfig.name){
+				throw new Error('Invalid page name at '+pageConfigPath);
 			}
 
 			var normalizeName = (name, isPageFile = false) => {

@@ -1,25 +1,25 @@
 module.exports = function(options, config, context) {
 	return {
-		name: context.lang.VOLUNTARIADO,
+		name: context.lang.CONTACT,
+		enabled:false,
 		context: {
 			init: function init() {
 				new Vue({
 					el: 'form',
-					name: 'voluntariado',
+					name: 'contact',
 					data() {
 						return {
 							sending: false,
 							form: {
 								name: '',
 								email: '',
-								whyMessage: '',
-								helpMessage: '',
-								dateMessage: ''
+								message: ''
 							}
 						}
 					},
 					methods: {
 						send(e) {
+
 							e.stopPropagation();
 							if (!this.form.name || !this.form.email) {
 								if (!this.form.name) {
@@ -30,17 +30,17 @@ module.exports = function(options, config, context) {
 								}
 								return;
 							}
-							this.sending=true;
+							this.sending = true;
 							$.ajax({
-								url: `${SERVER.API_URL}/api/voluntariado/save`,
+								url: `${SERVER.API_URL}/api/formularioContacto/save`,
 								data: JSON.stringify(Object.assign({}, this.form)),
 								contentType: "application/json; charset=utf-8",
 								type: 'POST',
 								error: () => {
-									this.sending=false;
+									this.sending = false;
 								},
 								success: (data) => {
-									this.sending=false;
+									this.sending = false;
 									if (!data.result) {
 										new Noty({
 											layout: 'bottomRight',
@@ -59,6 +59,45 @@ module.exports = function(options, config, context) {
 									}
 								}
 							});
+
+							/*
+							e.stopPropagation();
+							if(!this.name){
+								return;
+							}
+							$.ajax({
+								url: `${SERVER.API_URL}/api/email/send`,
+								data: JSON.stringify({
+									subject:`${this.name} completo el formulario de contacto`,
+									html:`
+									<ul>
+										<li>
+											Nombre y apellido: ${this.name}
+										</li>
+										<li>
+											Email: ${this.email}
+										</li>
+										<li>
+											<p>
+											Message:<br><br>
+											${this.message}
+											</p>
+										</li>
+										
+									</ul>
+									`
+								}),
+								contentType: "application/json; charset=utf-8",
+								type: 'POST',
+								error: () => {
+									
+								},
+								success: (data) => {
+									console.info('RES',data);
+								}
+
+							});
+								*/
 						}
 					}
 				});

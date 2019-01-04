@@ -1,30 +1,27 @@
 module.exports = function() {
 	return {
-		name: 'faq',
-		path: 'admin',
-		enabled:false,
+		name: 'console',
+		enabled:true,
+		path: '',
 		context: {
-			type: 'admin',
 			init: function init() {
 				new Vue({
-					el: '.admin',
-					name: 'adminFaq',
+					el: '.container',
+					name: 'clientDashboard',
 					data() {
 						return {
-							
 						}
 					},
 					created() {
 						
 					},
-					mounted() {},
+					mounted() {
+						console.log('dash2')
+					},
 					methods: {
 						
 					}
 				});
-
-
-
 			}
 		}
 	}
