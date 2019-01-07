@@ -1,0 +1,19 @@
+<div class="container">
+	<article>
+		<h2>Service details: <span v-html="serviceLabel"></span></h2>
+		
+		<div v-show="service && service.projects && service.projects.length>0">
+			<p>Available sites</p>
+			<ul class="list projectsList">
+				<li v-for="item in (service||{}).projects">
+					<label v-html="projectPrimaryDomain(item)"></label>
+					<div>
+						<a class="btn" :href="`/cms?id=${item._id}`">Content editor</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		
+	</article>
+</div>

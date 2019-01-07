@@ -1,0 +1,17 @@
+{{>partial_cmssidebar}}
+<div class="cmsSidebarRight appScope">
+	<div class="container">
+		<ul class="list">
+			<li class="cmsPostItem" v-for="item in posts">
+				<div class="postItemLeft">
+					<img :src="postThumbImage(item)" class="postThumbImage" />
+				</div>
+				<div class="postItemRight">
+					<h3 v-html="postTitle(item)"></h3>
+					<p v-html="postShortDescription(item)" class="postShortDescription"></p>
+					<a class="btn" :href="postEditUrl(item)">Editar</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -9,7 +9,7 @@ module.exports = {
 		en:"About Us"
 	},
 	NAV_HOME:{
-		en:"Home"
+		en:"Hosting"
 	},
 	ABOUT_US_QUOTE:{
 		en:"We are helping entrepreneurs since 2014. MisitioBA had provided advicing and software development services in the past. We had evolved and we are commited to provide to project owners with the tools needed to host and modify static websites."

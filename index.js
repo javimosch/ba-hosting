@@ -24,11 +24,12 @@ if (argv.s || argv.server) {
     //server.git.pushPath('src/*');
 
 
-    runLocalServer();
+    //runLocalServer();
     if (argv.a || argv.api) {
 
     } else {
         compileEntireSite();
+        console.log('Site compiled');
     }
 } else {
     if (argv.b || argv.build) {
@@ -189,7 +190,7 @@ function loadHandlebarHelpers() {
     });
     Handlebars.registerHelper('pagePath', function(langPath, name, options) {
         if (!name) {
-            console.error('HBS pagePath no name supplied')
+            //console.error('HBS pagePath no name supplied')
             return '';
         }
         name = name.split(' ').join('-')
@@ -226,6 +227,13 @@ function loadHandlebarHelpers() {
     Handlebars.registerHelper('toString', function(result, options) {
         result = result.toString('utf-8');
         return new Handlebars.SafeString(result);
+    });
+    Handlebars.registerHelper('ifNotEmpty', function(conditional, options) {
+        if (!!conditional) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
     });
     /*
     Handlebars.registerHelper('if', function(conditional, options) {
@@ -298,6 +306,21 @@ function runLocalServer() {
         createApiRoutes(app);
     }
 
+
+    //kill port
+
+    try {
+        var line = exec(`netstat -tulpn | grep LISTEN | grep 8128`);
+        if (!!line) {
+            line = line.split(':::')[1];
+            line = line.split(' ').join('').split('node').join('');
+            console.log('Killing process', line);
+            exec(`kill -9 ${line}`);
+        }
+    } catch (err) {
+        console.log('Not able to kill port:', err.stack)
+    }
+
     app.listen(port, () => {
         if (argv.a || argv.api) {
             console.log(`Local server listening on port ${port}! (API MODE)`);
@@ -309,4 +332,27 @@ function runLocalServer() {
 
 function createApiRoutes(app) {
     require('./api')(app);
+}
+
+
+
+process.on('SIGINT', () => {
+    killServer();
+});
+process.on('message', (msg) => {
+    if (msg == 'shutdown') {
+        killServer();
+    }
+});
+
+function killServer() {
+    console.log('Closing server...')
+    app.close(() => {
+        console.log('Server closed !!! ')
+        process.exit()
+    })
+    setTimeout((e) => {
+        console.log('Forcing server close !!!', e)
+        process.exit(1)
+    }, 1000)
 }

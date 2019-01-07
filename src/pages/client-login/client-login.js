@@ -1,7 +1,7 @@
 module.exports = function() {
 	return {
 		name: 'client-area',
-		enabled:true,
+		enabled: true,
 		path: '',
 		context: {
 			init: function init() {
@@ -10,14 +10,29 @@ module.exports = function() {
 					name: 'clientLogin',
 					data() {
 						return {
+							email: '',
+							password: ''
 						}
 					},
 					created() {
-						
+
 					},
-					mounted() {},
+					mounted() {
+						window.ba.auth.check().then(isLogged => {
+							console.warn(isLogged)
+							if (isLogged) {
+								window.location.href = "/console";
+							}
+						});
+					},
 					methods: {
-						
+						login() {
+							window.ba.auth.loginWithCredentials(this.email, this.password).then(done => {
+								if (done) {
+									window.location.href = "/console";
+								}
+							});
+						}
 					}
 				});
 			}

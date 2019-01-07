@@ -78,6 +78,9 @@ module.exports = {
 				context.langPath = options.language != config.defaultLanguage ? `${options.language}/` : ``;
 				var html = template(Object.assign({}, context, pageConfig.context || {}));
 				var writePath = path.join(basePath, pageConfig.path || '', pageConfig.name.toLowerCase(), 'index.html');
+				
+				//console.log('write', writePath)
+				
 				sander.writeFileSync(writePath, html);
 			})
 		});

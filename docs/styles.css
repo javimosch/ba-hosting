@@ -59,6 +59,13 @@ header {
 
 .footerNav {
     display: block;
+    background-color:#001f3f;
+    padding:20px;
+}
+
+.footerNav li{
+    width:100%!important;
+    display:block!important;
 }
 
 .headerNav {
@@ -154,6 +161,84 @@ form>button[disabled],
     margin-top:25px!important;
 }
 
+.cmsPostSaveAtLabel{
+    padding-left:15px;
+    font-size:10px;
+    font-style:italic;
+}
+
+.cmsPostTitle{
+        margin-bottom: 10px;
+    font-size: 30px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.cmsPostItem{
+        min-width: -webkit-fill-available!important;
+    background-color: white!important;
+    box-shadow: 0px 5px 10px lightgrey;
+    min-height: 150px;
+    padding: 30px!important;
+}
+.cmsPostItem .postShortDescription{
+    color:black;
+}
+.postThumbImage{
+    min-height: 100px;
+}
+.postItemRight{
+    display:inline-block;
+    width: calc(100% - 150px - 60px);
+    vertical-align: top;
+    padding: 0px 20px;
+}
+.postItemLeft{
+    display:inline-block;
+    width:150px;
+}
+
+.cmsSidebar{
+    margin-top:20px;
+    display: inline-block;
+    background-color: transparent;
+    min-height: calc(100vh + 40px);
+    height: 100%;
+    padding: 0px;
+    width: 30%;
+    max-width: 230px;
+    vertical-align: top;
+        border-radius: 0px 5px 5px 0px;
+}
+.cmsSidebarRight{
+            display: inline-block;
+    background: white;
+    padding: 30px;
+    width: calc(70% - 80px);
+    min-height: calc(100% - 20px);
+    box-shadow: -1px 0px 3px lightgrey;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+
+
+.cmsSidebarLink{
+        font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+.cmsSidebarLink i {
+    text-align: center;
+    display: inline-block;
+}
+.cmsSidebarLink span{
+    letter-spacing: 5px;
+    padding-left: 10px;
+    text-align: center;
+}
+
 
 
 .btn, button {
@@ -173,7 +258,7 @@ form>button[disabled],
     display: block;
 }
 
-form>button:hover,
+button:hover,
 .btn:hover {
     opacity: 0.8;
 }
@@ -289,6 +374,10 @@ form>button:active,
     display: block;
 }
 
+.mainContent {
+min-height: calc(40vh);
+}
+
 .programationItem {
     padding: 20px;
     background-color: peachpuff;
@@ -297,9 +386,19 @@ form>button:active,
     margin-bottom: 10px;
 }
 
+
+.clickable{
+    cursor:pointer;
+}
+
 .ClientLoginForm{
-    max-width:400px;
-    margin:0 auto;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    justify-content: center;
+    align-items: center;
 }
 
 .adminProgramacionItemImage {
@@ -638,7 +737,6 @@ footer {
     background-color: #a9f08280;
     padding-top: 10px;
     padding-bottom: 10px;
-    margin-top: 30px;
 }
 
 .mobileCentered {
@@ -749,7 +847,7 @@ iframe {
     .ClientLoginForm{
         display:flex;
         flex-direction: column;
-        min-height: 200px;
+        min-height: calc(50vh);
         justify-content: center;
         align-items: center;
     }
@@ -925,6 +1023,7 @@ iframe {
 
     .footerNav {
         display: none;
+        
     }
 
     .headerNav {
@@ -965,6 +1064,7 @@ iframe {
         margin-top: 50px;
         padding:30px;
     }
+
 
     .mainContent {
         min-height: calc(100vh - 300px);
@@ -1027,6 +1127,42 @@ iframe {
     list-style: none;
     padding: 0px;
 }
+.list li{
+        min-width: 300px;
+    background: #968b8b;
+    color: white;
+    padding: 10px;
+    max-width: 200px;
+}
+.list li.cmsSidebarItem{
+            max-width: -webkit-fill-available;
+    min-width: -webkit-fill-available;
+    border-radius: 0px;
+    color: white;
+    font-size: 20px;
+    background-color: #001f3f;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 30px;
+}
+.list li.cmsSidebarItem:hover{
+    cursor: pointer;
+    background-color: #21262A;
+}
+
+
+.projectsList li{
+    background-color:#f3eaea;
+    color:black;
+    padding:30px 10px;
+    
+}
+.projectsList label{
+    padding-bottom: 10px;
+    display: block;
+    font-size:25px;
+}
+
 
 .adminContactFormMessages{
     margin-left: 0px;

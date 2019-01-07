@@ -4,16 +4,16 @@
 				<label>Email</label>
 			</div>
 			<div>
-				<input class="" />
+				<input class="" autocomplete="false" v-model="email"/>
 			</div>
 			<div>
 				<label>Password</label>
 			</div>
 			<div>
-				<input class="" />
+				<input type="password" autocomplete="false" class="" v-model="password" />
 			</div>
-			<div>
-				<button>Login</button>
+			<div class="mt-2">
+				<button @click="login">Login</button>
 			</div>	
 	</div>
 </div>

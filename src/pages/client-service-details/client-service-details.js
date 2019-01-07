@@ -1,20 +1,20 @@
 module.exports = function() {
 	return {
-		name: 'console',
+		name: 'service-details',
 		enabled: true,
 		path: '',
 		context: {
 			head:{
-				title:'Console'
+				title:'Service details'
 			},
 			init: function init() {
 				new Vue({
 					el: '.container',
-					name: 'clientDashboard',
+					name: 'clientServiceDetails',
 					data() {
 						return {
 							user: null,
-							services: []
+							service: {}
 						}
 					},
 					created() {
@@ -22,13 +22,18 @@ module.exports = function() {
 					},
 					async mounted() {
 						this.user = await window.ba.user.profile();
-						this.services = await window.ba.services.hired();
+						var id = window.location.href.split('id=')[1]
+						this.service = await window.ba.services.findbyId(id);
 					},
-					methods: {
-						openService(item){
-							window.location.href=`/service-details?id=${item._id}`
+					methods:{
+						projectPrimaryDomain(item){
+							return item.domain;
 						},
-						serviceLabel(type){
+					},
+					computed: {
+						
+						serviceLabel(){
+							var type = this.service.type;
 							return ({
 								COMMUNITY:'Static Hosting Plan for Developers (SFTP + 1 Website + Content Editor)',
 								STARTUP:'Static Hosting Plan for Startups (SFTP + 5 Websites + Content Editor)',
