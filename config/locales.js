@@ -1,4 +1,36 @@
 module.exports = {
+    FEATURES_TITLE:{
+        en:"Give your static website wings",
+        es:"Dale alas a tus sitios web"
+    },
+    FEATURES_QUOTE:{
+        en:"Stop worrying about infrastructure and start saving time",
+        es:"Deja de preocuparte por la infraestructura y empieza a salvar tiempo"
+    },
+    FEATURE_SECURE_TITLE:{
+        en:"Secure out of the box",
+        es:"Seguro 'out of the box'"
+    },
+    FEATURE_SECURE_TEXT:{
+        en:"All padlocks, all the time. We auto redirect HTTP to HTTPS. Custom domains include an auto-rewewing wildcard SSL certificate.",
+        es:"Lo tenemos en cuenta todo el tiempo. Redireccionamos HTTP a HTTPS. Los dominios personalizados incluyen el renovamiento de certificados SSL wildcard de forma automatica."
+    },
+    FEATURE_OTHERS_TITLE:{
+        en:"Little things done right",
+        es:"Pequeñas cosas bien echas"
+    },
+    FEATURE_OTHERS_TEXT:{
+        en:"Cache headers, pretty URLs, trailing slashes, gzip compression, HTTP/2, SSL enforcement—there's a lot of details to get right. Let us take care of those things so you can focus on great websites.",
+        es:"Cache headers, pretty URLs, trailing slashes, compresion gzip, HTTP/2, Certifacdos SSL incoporados y un monton de mejoras bien hechas. Dejanos encargarnos de esos pequeños detalles asi puedes enfocarte en crear asombrosos sitios web."
+    },
+    FEATURE_GLOBAL_TITLE:{
+        en:"Global distribution",
+        es:"Distribucion global"
+    },
+    FEATURE_GLOBAL_TEXT:{
+        en:"Each deployment is replicated to multiple AWS regions and fronted by the CloudFront CDN with nodes around the world. Give all your visitors a fast experience, no matter where they're at.",
+        es:"Cada deployment es replicado en multiples regiones AWS y servido por CloudFront CDN with nodos alrededor del mundo. Entrega a los visitantes una experiencia rapida, no importa donde se encuentren."
+    },
     BA_META_IMAGE:{
         en:"https://hosting.misitioba.com/img/ba-meta-image.jpg"
     },
@@ -53,8 +85,8 @@ module.exports = {
 		es:"registrar-alojamiento-web-grauito"
 	},
     NAV_REGISTER: {
-        en: "Register now!",
-        es: "Registrarse!"
+        en: "Sign-up",
+        es: "Registrar cuenta"
     },
     HOMEPAGE_CTA_BUTTON: {
         en: "Client area",
@@ -65,8 +97,8 @@ module.exports = {
         es: "Sobre nosotros"
     },
     FOOTER_FACEBOOK_TEXT: {
-        en: 'Technical&nbsp;Support&nbsp;on&nbsp;',
-        es: 'Soporte&nbsp;tecnico&nbsp;en&nbsp;'
+        en: 'Facebook',
+        es: 'Facebook'
     },
     SIDEBAR_POSTS: {
         en: "Posts",
@@ -83,12 +115,12 @@ module.exports = {
         en: "Contact"
     },
     FOOTER_ABOUT_US: {
-        en: "About Us",
-        es: "Sobre nosotros"
+        en: "About",
+        es: "Nosotros"
     },
     NAV_HOME: {
-        en: "Free hosting",
-        es: "Alojamiento gratuito"
+        en: "Our service",
+        es: "Nuestro servicio"
     },
     ABOUT_US_QUOTE: {
         en: "We are helping entrepreneurs since 2014. MisitioBA had provided advicing and software development services in the past. We had evolved and we are commited to provide to project owners with the tools needed to host and modify static websites.",

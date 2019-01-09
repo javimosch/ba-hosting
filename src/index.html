@@ -100,11 +100,11 @@
     {{/each}}
     {{/ifNotEmpty}}
     <script type="text/javascript">
-    { {# if (typeIs init 'function') } } { {# toString init } } {
-        {
-            /toString}}
-            if (!!init) {
-                init();
-            } { { /if}}
+        {{# if (typeIs init 'function') }} 
+            {{# toString init }}{{/toString}}
+                if (!!init) {
+                    init();
+                } 
+        {{/if}}
     </script>
 </body>
