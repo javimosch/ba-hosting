@@ -1,6 +1,6 @@
 module.exports = {
     BA_META_IMAGE:{
-        en:"https://api.misitioba.com/img/ba-meta-image.jpg"
+        en:"https://hosting.misitioba.com/img/ba-meta-image.jpg"
     },
     META_TITLE_2:{
         en:"MisitioBA: All-in-one platform for automating static web projects"
