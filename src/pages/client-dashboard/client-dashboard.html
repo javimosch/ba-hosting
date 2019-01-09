@@ -1,9 +1,28 @@
 <div class="container">
 	<article>
-		<h2>Hired services</h2>
-		<ul class="list">
+		<h2>{{lang.YOUR_SERVICES}}</h2>
+		<ul class="list hired" v-show="services.length>0" style="display:none;">
 			<li v-for="item in services" @click="openService(item)" class="clickable">
-				<label v-html="serviceLabel(item.type)"></label>
+				<span v-html="item.code"></span>
+				<div v-html="serviceLabel(item)" class="serviceCodename font-1">
+				</div>
+				<div class="serviceState font-1" v-html="serviceState(item)"></div>
+			</li>
+		</ul>
+		<h2>{{lang.BILLING}}</h2>
+		<ul class="list" v-show="services.length>0" style="display:none;">
+			<li v-for="item in services" v-cloak>
+				<div class="billingServiceCode" v-html="item.code"></div>
+				<span v-html="serviceLabel(item)"></span>
+				<div class="servicePrice" v-html="servicePrice(item)">
+
+				</div>
+				<div v-show="canBuyPlan(item)">
+					<button @click="buyPlan(item)">{{lang.BILLING_BUY}}</button>
+				</div>
+				<div v-show="!canBuyPlan(item)">
+					<button @click="unbuyPlan(item)">{{lang.BILLING_UNBUY}}</button>
+				</div>
 			</li>
 		</ul>
 	</article>

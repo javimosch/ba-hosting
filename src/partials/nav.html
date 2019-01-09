@@ -1,64 +1,11 @@
-<ul class="menu">
-    <li><a href="/">{{lang.NAV_HOME}}</a></li>
-    <li><a href="/console">My products</a></li>
-    
-    <!--
-    <li>
-        <a href="{{#pagePath langPath lang.GRUPOS}}{{/pagePath}}">{{lang.GRUPOS}}</a>
-        <ul class="subMenu">
-            <li>
-                <a href="{{#pagePath langPath lang.GRUPOS}}{{/pagePath}}#escuelas">
-                {{lang.ESCUELAS}}</a></li>
-            <li>
-                <a href="{{#pagePath langPath lang.GRUPOS}}{{/pagePath}}#adultos">
-                Adultos&nbsp;mayores</a></li>
-            <li>
-                <a href="{{#pagePath langPath lang.GRUPOS}}{{/pagePath}}#familias">
-                {{lang.FAMILIAS}}</a></li>
-            <li>
-                <a href="{{#pagePath langPath lang.GRUPOS}}{{/pagePath}}#profesionales">
-                {{lang.PROFESIONALES}}</a></li>
-        </ul>
-    </li>
-    -->
-    
-        <!--
-    <li>
-        <a href="{{#pagePath langPath lang.PRODUCTOS_FERIAS}}{{/pagePath}}">
-                {{lang.PRODUCTOS_FERIAS}}</a>
-    
-        <ul class="subMenu">
-            <li>
-                <a href="{{#pagePath langPath lang.NUESTROS_PRODUCTOS}}{{/pagePath}}">{{lang.NUESTROS_PRODUCTOS}}</a>
-            </li>
-            <li>
-                <a href="{{#pagePath langPath lang.FERIAS_PRODUCTORES}}{{/pagePath}}">
-                    {{lang.FERIAS_PRODUCTORES}}</a></li>
-        </ul>
-    
-    </li>
-    
-    <li>
-        <a href="{{#pagePath langPath lang.HOSPEDAJES}}{{/pagePath}}">
-            {{#capitalize}}{{lang.HOSPEDAJES}}{{/capitalize}}
-        </a>
-    </li>
+<!--
+    {{#pagePath langPath lang.PAGE_REGISTER}}{{/pagePath}}
+-->
 
-    <li>
-        <a href="https://web.facebook.com/EutopiaEcoaldea/" target="_blank">
-            {{#capitalize}}{{lang.ACTUALIDADES}}{{/capitalize}}
-        </a>
-    </li>
-
-    <li class="languageMenuItem">
-        <a >{{currentLanguage}}</a>
-        <ul class="subMenu">
-            <li><a href="/">{{lang.es}}</a></li>
-            <li><a href="/en">{{lang.en}}</a></li>
-            <li><a href="/fr">{{lang.fr}}</a></li>
-            <li><a href="/de">{{lang.de}}</a></li>
-            <li><a href="/pr">{{lang.pr}}</a></li>
-        </ul>
-    </li>
-    -->
+<ul class="menu navScope">
+    <li><a href="{{#pagePath langPath '/'}}{{/pagePath}}">{{lang.NAV_HOME}}</a></li>
+    
+    <li v-show="!isLogged"><a href="{{#pagePath langPath lang.PAGE_REGISTER}}{{/pagePath}}">{{lang.NAV_REGISTER}}</a></li>
+    
+    <li style="display:none;" v-show="isLogged"><a href="{{#pagePath langPath 'console'}}{{/pagePath}}">{{lang.NAV_MY_PRODUCTS}}</a></li>
 </ul>

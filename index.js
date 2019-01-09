@@ -23,8 +23,9 @@ if (argv.s || argv.server) {
     //exec(`cd ${gitPath}; cd src/static; cp ${testFile} .`)
     //server.git.pushPath('src/*');
 
-
-    //runLocalServer();
+    if (process.env.SERVER === '1') {
+        runLocalServer();
+    }
     if (argv.a || argv.api) {
 
     } else {
@@ -83,6 +84,7 @@ function compileEntireSite() {
             language: 'es',
             outputFolder: 'docs/es'
         });
+        /*
         compileSiteOnce({
             language: 'fr',
             outputFolder: 'docs/fr'
@@ -95,6 +97,7 @@ function compileEntireSite() {
             language: 'pr',
             outputFolder: 'docs/pr'
         });
+        */
     } else {
         console.log('WARN: i18N Disabled')
     }
@@ -196,7 +199,9 @@ function loadHandlebarHelpers() {
         name = name.split(' ').join('-')
         name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         name = name.toLowerCase();
-        return `/${langPath}${name}`;
+        var str= `/${langPath}${name}`;
+        str = str.split('//').join('/');
+        return str;
     });
 
     Handlebars.registerHelper('stringify', function(obj, options) {
@@ -308,18 +313,19 @@ function runLocalServer() {
 
 
     //kill port
-
-    try {
-        var line = exec(`netstat -tulpn | grep LISTEN | grep 8128`);
-        if (!!line) {
-            line = line.split(':::')[1];
-            line = line.split(' ').join('').split('node').join('');
-            console.log('Killing process', line);
-            exec(`kill -9 ${line}`);
+    /*
+        try {
+            var line = exec(`netstat -tulpn | grep LISTEN | grep 8128`);
+            if (!!line) {
+                line = line.split(':::')[1];
+                line = line.split(' ').join('').split('node').join('');
+                console.log('Killing process', line);
+                exec(`kill -9 ${line}`);
+            }
+        } catch (err) {
+            console.log('Not able to kill port:', err.stack)
         }
-    } catch (err) {
-        console.log('Not able to kill port:', err.stack)
-    }
+        */
 
     app.listen(port, () => {
         if (argv.a || argv.api) {

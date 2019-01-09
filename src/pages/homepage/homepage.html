@@ -1,4 +1,9 @@
-<section>
+<section style="
+    min-height: calc(100vh - 300px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+">
     <section class="groupHeader" id="profesionales">
         <h2 class="desktopCentered">{{{lang.HOMEPAGE_QUOTE}}}</h2>
     </section>
@@ -7,7 +12,8 @@
         <!--
         <a href="/try-it-now">Try it now</a>
         -->
-        <a class="btn mx-auto" href="/client-area">Client area</a>
+        
+        <a class="btn mx-auto" href="{{#pagePath langPath '/client-area'}}{{/pagePath}}">{{lang.HOMEPAGE_CTA_BUTTON}}</a>
     </div>
     
 </section>

@@ -21,7 +21,7 @@ module.exports = function() {
 						window.ba.auth.check().then(isLogged => {
 							console.warn(isLogged)
 							if (isLogged) {
-								window.location.href = "/console";
+								window.routeTo('console')
 							}
 						});
 					},
@@ -29,7 +29,7 @@ module.exports = function() {
 						login() {
 							window.ba.auth.loginWithCredentials(this.email, this.password).then(done => {
 								if (done) {
-									window.location.href = "/console";
+									window.routeTo('console')
 								}
 							});
 						}

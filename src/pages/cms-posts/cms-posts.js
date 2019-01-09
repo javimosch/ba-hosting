@@ -24,6 +24,9 @@ module.exports = function() {
 						
 					},
 					methods:{
+						postPhysicFolderLabel(item){
+							return item && `Physical location: ${item.physicRelativePath}`;
+						},
 						postTitle(item){
 							return item && item.settings && item.settings.post && item.settings.post.title || '(No title)';
 						},

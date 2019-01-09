@@ -1,119 +1,110 @@
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Pragma" content="no-cache">
-	
-	<link rel="shortcut icon" href="/uploads/images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/uploads/images/favicon.ico" type="image/x-icon">
-<link rel="icon" type="image/png" href="/uploads/images/favicon-32x32.png" sizes="32x32" />
-	
-	<title>{{lang.META_TITLE}}</title>
-
-	<link rel="stylesheet" type="text/css" href="/libs/noty.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
-	{{#ifNotEmpty pageLinks}}
-		{{#each pageLinks}}
-			<link rel="stylesheet" type="text/css" href="{{this}}">
-		{{/each}}
-	{{/ifNotEmpty}}
-
-
-	{{#if (eq type 'admin')}}
-		
-	{{/if}}
-	<link rel="stylesheet" type="text/css" href="/styles.css?rnd={{#random}}{{/random}}">
-	
-	<script type="text/javascript" src="/js/common-admin.js"></script>
-	<script type="text/javascript" src="https://api.misitioba.com/misitioba-api-client.js"></script>
-	
-	<script type="text/javascript">
-		window.SERVER={
-			API_URL: '{{API_URL}}',
-			defaultCurrentPage:'{{defaultCurrentPage}}',
-			updateCode:'{{updateCode}}',
-			wipMode: '{{wipMode}}',
-			lang: JSON.parse(`{{#stringify lang}}{{/stringify}}`)
-		}
-	</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="description" content='{{lang.META_DESCRIPTION}}'>
+    <meta itemprop="name" content='{{lang.META_TITLE_2}}'>
+    <meta itemprop="description" content='{{lang.META_DESCRIPTION}}'>
+    <meta itemprop="image" content="{{lang.BA_META_IMAGE}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@misitioba" />
+    <meta name="twitter:title" content='{{lang.META_TITLE_2}}'>
+    <meta name="twitter:description" content='{{lang.META_TITLE_2}}'>
+    <meta name="twitter:creator" content="@netlify" />
+    <meta name="twitter:image" content="{{lang.BA_META_IMAGE}}" />
+    <meta property="og:title" content='{{lang.META_TITLE_2}}'>
+    <meta property="og:description" content='{{lang.META_DESCRIPTION}}'>
+    <meta name="og:image" content="{{lang.BA_META_IMAGE}}" />
+    <meta name="og:image:secure_url" content="{{lang.BA_META_IMAGE}}" />
+    <meta property="og:site_name" content="MisitioBA" />
+    <link rel="shortcut icon" href="/uploads/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/uploads/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" href="/uploads/images/favicon-32x32.png" sizes="32x32" />
+    <title>{{lang.META_TITLE}}</title>
+    <link rel="stylesheet" type="text/css" href="/libs/noty.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    {{#ifNotEmpty pageLinks}}
+    {{#each pageLinks}}
+    <link rel="stylesheet" type="text/css" href="{{this}}">
+    {{/each}}
+    {{/ifNotEmpty}}
+    <link rel="stylesheet" type="text/css" href="/styles.css?rnd={{#random}}{{/random}}">
+    <script type="text/javascript" src="/js/common-admin.js"></script>
+    <script type="text/javascript" src="https://api.misitioba.com/misitioba-api-client.js"></script>
+    <script type="text/javascript">
+    window.SERVER = {
+        API_URL: '{{API_URL}}',
+        defaultCurrentPage: '{{defaultCurrentPage}}',
+        updateCode: '{{updateCode}}',
+        wipMode: '{{wipMode}}',
+        lang: JSON.parse(`{{#stringify lang}}{{/stringify}}`),
+        langPath: '{{langPath}}'
+    }
+    window.routeTo = (name) => {
+        name = name.split(' ').join('-')
+        name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+        name = name.toLowerCase();
+        var str = `/${window.SERVER.langPath}${name}`;
+        str = str.split('//').join('/');
+        window.location.href = str;
+    }
+    </script>
 </head>
+
 <body>
-	{{#if (neq type 'admin')}}
-		{{> partial_header}}		
-	{{else}}
-		{{> partial_header}}
-		<!--
-		<section class="admin_header">
-	        <h3 class="brand">
-	        <a href="/">{{lang.META_TITLE}}</a>
-	         - Admin</h3>
-	        <hr>
-	    </section>
-	-->
-	{{/if}}
-
-	{{#if (neq type 'admin')}}
-		{{#if (eq wipMode true)}}
-			<div class="mainContent">
-				{{> page_wip}}
-			</div>
-		{{else}}    
-			<div class="mainContent">
-				{{> (lookup . 'currentPage') }}
-			</div>
-		{{/if}}
-	{{else}}
-		<div class="mainContent">
-				{{> (lookup . 'currentPage') }}
-		</div>
-	{{/if}}
-		
-    
-    
-
-	
-
-	{{#if (neq type 'admin')}}
-		{{> partial_footer}}
-	{{else}}
-		{{> partial_footer}}
-	{{/if}}
-
-	<script type="text/javascript" src="/libs/jquery-3.3.1.min.js"></script>
-
-	{{#if (eq NODE_ENV 'production')}}
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
-	{{else}}
-		<script type="text/javascript" src="/libs/vue.js"></script>
-	{{/if}}
-	<script type="text/javascript" src='/libs/vue-components.js'></script>
-	
-	<script type="text/javascript" src="/libs/moment.js"></script>
-	<script type="text/javascript" src="/libs/noty.min.js"></script>
-	<script type="text/javascript">
-		window.moment.locale('es');
-	</script>
-
-	{{#if (eq type 'admin')}}
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/theme-monokai.js"></script>
-	{{/if}}
-	
-	{{#ifNotEmpty pageScripts}}
-		{{#each pageScripts}}
-			<script type="text/javascript" src="{{this}}"></script>
-		{{/each}}
-	{{/ifNotEmpty}}
-
-	<!--
-	<script type="text/javascript" src="/bundle.js"></script>
--->
-	<script type="text/javascript">
-		{{#if (typeIs init 'function')}}
-			{{#toString init}}{{/toString}}
-			if(!!init){
-				init();
-			}
-		{{/if}}
-	</script>
+    {{#if (neq type 'admin')}}
+    {{> partial_header}}
+    {{else}}
+    {{> partial_header}}
+    {{/if}}
+    {{#if (neq type 'admin')}}
+    {{#if (eq wipMode true)}}
+    <div class="mainContent">
+        {{> page_wip}}
+    </div>
+    {{else}}
+    <div class="mainContent">
+        {{> (lookup . 'currentPage') }}
+    </div>
+    {{/if}}
+    {{else}}
+    <div class="mainContent">
+        {{> (lookup . 'currentPage') }}
+    </div>
+    {{/if}}
+    {{#if (neq type 'admin')}}
+    {{> partial_footer}}
+    {{else}}
+    {{> partial_footer}}
+    {{/if}}
+    <script type="text/javascript" src="/libs/jquery-3.3.1.min.js"></script>
+    {{#if (eq NODE_ENV 'production')}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
+    {{else}}
+    <script type="text/javascript" src="/libs/vue.js"></script>
+    {{/if}}
+    <script type="text/javascript" src='/libs/vue-components.js'></script>
+    <script type="text/javascript" src="/libs/moment.js"></script>
+    <script type="text/javascript" src="/libs/noty.min.js"></script>
+    <script type="text/javascript">
+    window.moment.locale('es');
+    </script>
+    {{#if (eq type 'admin')}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/theme-monokai.js"></script>
+    {{/if}}
+    <script type="text/javascript" src="/js/nav.js"></script>
+    {{#ifNotEmpty pageScripts}}
+    {{#each pageScripts}}
+    <script type="text/javascript" src="{{this}}"></script>
+    {{/each}}
+    {{/ifNotEmpty}}
+    <script type="text/javascript">
+    { {# if (typeIs init 'function') } } { {# toString init } } {
+        {
+            /toString}}
+            if (!!init) {
+                init();
+            } { { /if}}
+    </script>
 </body>

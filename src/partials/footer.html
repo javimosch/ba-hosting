@@ -1,32 +1,12 @@
 <nav class="footerNav">
-        {{> partial_nav}}
+    {{> partial_nav}}
 </nav>
 <footer>
-    <div class="desktopSplitTwo footerFlexMobileReverse">
-        
-        
-        <div class="iiLogoWrapper">
-            <p class="fnt-10 italic text-center">
-                Desarrollado por
-            </p>
-            <a href="https://incubadoraitinerante.com" target="_blank">
-            <img src="https://res.cloudinary.com/misitioba/image/upload/v1545313622/incubadora_itinerante/logo_trans.png" class="img-fluid incubadoraItineranteLogo"/>
-            </a>
-        </div>
-        <div>
-            <ul class="menu">
-        
-        <li><a href="{{#pagePath langPath lang.ABOUT_US}}{{/pagePath}}">{{lang.ABOUT_US}}</a></li>
-<!--
-        <li><a href="{{#pagePath langPath lang.PROGRAMACION}}{{/pagePath}}">{{lang.PROGRAMACION}}</a></li>
-    
-        <li><a href="{{#pagePath langPath lang.CONTACTO}}{{/pagePath}}">{{lang.CONTACTO}}</a></li>
-        
-        <li><a href="{{#pagePath langPath lang.VOLUNTARIADO}}{{/pagePath}}">{{lang.VOLUNTARIADO}}</a></li>
-    -->
+    <ul class="">
+        <li><a href="{{#pagePath langPath lang.PAGE_ABOUT_US}}{{/pagePath}}">{{lang.FOOTER_ABOUT_US}}</a></li>
         <li class="socialIcons">
             <a href="https://www.facebook.com/misitioba/" target="_blank">
-                <i class="fab fa-facebook fb-icon"></i>
+                {{{lang.FOOTER_FACEBOOK_TEXT}}}<i class="fab fa-facebook fb-icon"></i>
             </a>
             <!--
             <a href="http://instagram.com/eutopiaecoaldea" target="_blank">
@@ -34,9 +14,7 @@
             </a>
             -->
         </li>
-        
+        <li><a href="/es">Version en español</a></li>
+        <li><a href="/">English version</a></li>
     </ul>
-        </div>
-    </div>
-    
 </footer>

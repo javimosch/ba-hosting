@@ -31,13 +31,12 @@ module.exports = function() {
 						},
 					},
 					computed: {
-						
-						serviceLabel(){
+						serviceLabel() {
 							var type = this.service.type;
 							return ({
-								COMMUNITY:'Static Hosting Plan for Developers (SFTP + 1 Website + Content Editor)',
-								STARTUP:'Static Hosting Plan for Startups (SFTP + 5 Websites + Content Editor)',
-								ENTERPRISE:'Static Hosting Plan for Companies (SFTP + 20 Websites + Content Editor)'
+								COMMUNITY: 'Community Plan',
+								STARTUP: 'Startup Plan',
+								ENTERPRISE: 'Enterprise Plan'
 							})[type];
 						}
 					}

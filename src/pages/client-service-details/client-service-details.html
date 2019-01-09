@@ -1,14 +1,14 @@
 <div class="container">
 	<article>
-		<h2>Service details: <span v-html="serviceLabel"></span></h2>
+		<h2>{{lang.DETAIL}}: <span v-html="serviceLabel"></span></h2>
 		
-		<div v-show="service && service.projects && service.projects.length>0">
-			<p>Available sites</p>
+		<div v-show="service && service.projects && service.projects.length>0" v-cloak style="display:none;">
+			
 			<ul class="list projectsList">
-				<li v-for="item in (service||{}).projects">
+				<li v-for="item in (service||{}).projects" v-cloak>
 					<label v-html="projectPrimaryDomain(item)"></label>
-					<div>
-						<a class="btn" :href="`/cms?id=${item._id}`">Content editor</a>
+					<div style="height:40px;">
+						<a class="btn" :href="`/cms?id=${item._id}`">{{lang.DASHBOARD}}</a>
 					</div>
 				</li>
 			</ul>
