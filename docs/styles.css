@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald);
-@import url('https://fonts.googleapis.com/css?family=PT+Sans:700|Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
 h1,
 h2,
@@ -13,19 +13,56 @@ h6 {
 }
 
 html,
-body {
+body, {
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans';
+    
     font-size: 17px;
 }
-
-footer a,
-nav a {
-    font-family: 'Quicksand', sans-serif !important;
+html,
+body, p, span{
+    font-family: 'Quicksand', sans-serif;
 }
-li span, .font-1{
-    font-family: 'Quicksand', sans-serif !important;
+
+.featuresSection{
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+
+.featureText{}
+.featureTitle{display: flex;justify-content: center;align-items: flex-end;}
+.featureTitle svg{
+    width: 20px;
+    position: relative;
+    /* top: -5px; */
+    padding-right: 5px;
+}
+.featureTitle span{font-size: 18px;
+    font-weight: bold;}
+
+.row{
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ width: 100%;
+}
+.col-1-3{
+    width: 30%;
+    display: inline-block;
+    margin: 10px;
+}
+
+.sectionTitle{
+    text-align: center;
+    color: #478080;
+    margin-bottom: 0px;
+    margin-top: 50px;
+}
+.sectionQuote{
+    text-align: center;
+    margin-top: 0px;
+    color: lightslategray;
 }
 
 .serviceState{
@@ -36,7 +73,7 @@ li span, .font-1{
 }
 
 .projectsList label {
-    font-family: 'PT Sans', sans-serif;
+    
 }
 
 .servicePrice{
@@ -52,7 +89,7 @@ li span, .font-1{
 
 
 .seoRegisterMessage {
-    font-family: 'Quicksand', sans-serif !important;
+    
     font-size: larger;
     padding-top: 100px;
 }
@@ -101,19 +138,25 @@ header {
 
 footer ul {
     padding: 20px 30px;
-    background: white;
     border-radius: 0px;
     list-style: none;
-    margin: 0px;
+    margin: 0px auto;
+    max-width: 300px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 footer li {
     margin-bottom: 5px;
-
+    display: inline-block;
+    margin: 10px;
 }
 
 footer a {
     text-decoration: none;
+    color: white;
+    font-size: 14px;
 }
 
 .footerNav {
@@ -327,7 +370,7 @@ button {
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0px 5px 10px #0000008c;
-    font-family: 'Quicksand', sans-serif !important;
+    
 }
 
 
@@ -821,7 +864,7 @@ section.admin section {
 footer {
     background-color: #001f3f;
     padding-top: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 30px;
 }
 
 .mobileCentered {
@@ -931,6 +974,11 @@ iframe {
 
 @media only screen and (min-width: 992px) {
 
+    .row{
+        align-items: flex-start;
+ flex-direction: row;
+}
+
     footer {
     background-color: #001f3f;
     padding-top: 10px;
@@ -939,7 +987,7 @@ iframe {
 
     footer ul {
     padding: 20px 30px;
-    background: white;
+    background: transparent;
     border-radius: 5px;
     list-style: none;
     margin: 0px;
@@ -1217,9 +1265,8 @@ iframe {
     }
 
     ul.menu>li>a {
-        font-size: 16px;
+        font-size: 14px;
         text-decoration: none;
-
         margin: 0 auto;
         display: block;
         text-align: center;
@@ -1285,7 +1332,7 @@ iframe {
     display: block;
     font-size: 30px;
     font-weight: bold;
-    font-family: 'Oswald', sans-serif;
+    
 }
 
 
