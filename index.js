@@ -10,45 +10,35 @@ var rimraf = server.fs.rimraf;
 const sander = require('sander');
 const path = require('path');
 
-if (argv.gitd) {
-    console.log('Deploy from temp...')
-    server.git.deploy()
-    process.exit(0);
+if (argv.s || argv.server) {
+    runLocalServer();
+    build();
+}
+if (argv.b || argv.build) {
+    build();
+}
+if (argv.w || argv.watch) {
+
+    var chokidar = require('chokidar');
+    chokidar.watch([`${__dirname}/src`,`${__dirname}/config`], {
+        ignored: /(^|[\/\\])\../,
+        ignoreInitial: true
+    }).on('change', (path, stats) => {
+        console.log('WATCH CHANGE', path);
+        build(); 
+        server.livereload.trigger();
+    }).on('add', (path, stats) => {
+        console.log('WATCH ADD', path);
+        build();
+        server.livereload.trigger();
+    });
 }
 
-if (argv.s || argv.server) {
 
-    //var testFile = path.join(process.cwd(), 'deploy.pub')
-    //var gitPath = server.git.getPath();
-    //exec(`cd ${gitPath}; cd src/static; cp ${testFile} .`)
-    //server.git.pushPath('src/*');
 
-    if (process.env.SERVER === '1') {
-        runLocalServer();
-    }
-    if (argv.a || argv.api) {
-
-    } else {
-        compileEntireSite();
-        console.log('Site compiled');
-    }
-} else {
-    if (argv.b || argv.build) {
-        compileEntireSite();
-        console.log('Site compiled');
-    } else {
-        if (argv.d || argv.deploy) {
-            console.log('DEPRECATED (yarn deploy)')
-            return process.exit(0);
-            if (argv.a || argv.api) {
-                console.log('Commiting and deploying api')
-                exec('git add api/*; git add index.js;git commit -m "auto:api";git stash; git pull --rebase origin master; git stash pop;git push heroku master');
-            } else {
-                //compileEntireSite();
-                //exec('git add docs/*; git commit -m "deploy"; git stash; git pull --rebase origin master; git stash pop; git push origin master');
-            }
-        }
-    }
+function build() {
+    compileEntireSite();
+    console.log('Site compiled');
 }
 
 function compileEntireSite() {
@@ -71,11 +61,6 @@ function compileEntireSite() {
         }
     }
 
-    //Javascript
-    //server.webpack.compile();
-
-
-    //Generate site
     compileSiteOnce({
         language: 'en'
     });
@@ -84,20 +69,6 @@ function compileEntireSite() {
             language: 'es',
             outputFolder: 'docs/es'
         });
-        /*
-        compileSiteOnce({
-            language: 'fr',
-            outputFolder: 'docs/fr'
-        });
-        compileSiteOnce({
-            language: 'de',
-            outputFolder: 'docs/de'
-        });
-        compileSiteOnce({
-            language: 'pr',
-            outputFolder: 'docs/pr'
-        });
-        */
     } else {
         console.log('WARN: i18N Disabled')
     }
@@ -199,7 +170,7 @@ function loadHandlebarHelpers() {
         name = name.split(' ').join('-')
         name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         name = name.toLowerCase();
-        var str= `/${langPath}${name}`;
+        var str = `/${langPath}${name}`;
         str = str.split('//').join('/');
         return str;
     });
@@ -277,7 +248,9 @@ function compileSiteOnce(options = {}) {
     context.currentPage = context.defaultCurrentPage;
     context.langPath = options.language != config.defaultLanguage ? `${options.language}/` : ``;
     var html = template(context);
-    sander.writeFileSync(fileName('index.html'), html);
+    let result = server.pages.injectHtml(html);
+    server.livereload.addPage(context.currentPage, result, context.currentLanguage, context);
+    sander.writeFileSync(fileName('index.html'), result.html);
 
 
 }
@@ -285,6 +258,21 @@ function compileSiteOnce(options = {}) {
 function runLocalServer() {
     const express = require('express');
     const app = express();
+    var appServer = require('http').Server(app);
+    
+    if (argv.w || argv.watch) {
+        var io = require('socket.io')(appServer);
+        io.on('connection', function(socket) {
+            //console.log('socket connected')
+            socket.on('reportPage',data=>{
+                server.livereload.addActivePage(data.page,data.lang);
+            });
+        });
+
+        process.io = io;
+        //console.log('socket.io waiting')
+    }
+
     var cors = require('cors')
 
     app.use(cors());
@@ -327,13 +315,22 @@ function runLocalServer() {
         }
         */
 
-    app.listen(port, () => {
+    if (process.env.NODE_ENV !== 'production') {
+        app.get('/livereload.js', (req, res) => {
+            server.livereload.addActivePage(req.query.page,req.query.language);
+            res.send(server.livereload.getClientScript(port));
+        })
+    }
+
+
+    appServer.listen(port, () => {
         if (argv.a || argv.api) {
             console.log(`Local server listening on port ${port}! (API MODE)`);
         } else {
             console.log(`Local server listening on port ${port}!`);
         }
     });
+    process.app = app;
 }
 
 function createApiRoutes(app) {
@@ -341,7 +338,7 @@ function createApiRoutes(app) {
 }
 
 
-
+/*
 process.on('SIGINT', () => {
     killServer();
 });
@@ -353,12 +350,14 @@ process.on('message', (msg) => {
 
 function killServer() {
     console.log('Closing server...')
-    app.close(() => {
-        console.log('Server closed !!! ')
-        process.exit()
-    })
+    try {
+        process.app.close(() => {
+            console.log('Server closed !!! ')
+            process.exit()
+        });
+    } catch (err) {}
     setTimeout((e) => {
         console.log('Forcing server close !!!', e)
         process.exit(1)
     }, 1000)
-}
+}*/

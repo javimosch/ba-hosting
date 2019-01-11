@@ -1,0 +1,19 @@
+{{>partial_cmssidebar}}
+<div class="cmsSidebarRight appScope">
+	<div class="container">
+		<div class="font-1 pageTitle">Pages</div>
+		<ul class="list" v-show="items.length>0" v-cloak style="display:none;">
+			<li class="cmsPostItem" v-for="item in items">
+					<i class="far fa-file"></i>
+					<span v-html="postTitle(item)"></span>
+					
+					<p v-if="false" v-html="postShortDescription(item)" class="postShortDescription"></p>
+					<label v-if="false" v-html="postPhysicFolderLabel(item)" class="postPhysicalPath" ></label>
+					<div v-if="false">
+						<a class="btn" :href="postEditUrl(item)">Editar</a>
+					</div>
+				
+			</li>
+		</ul>
+	</div>
+</div>

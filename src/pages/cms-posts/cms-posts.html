@@ -1,6 +1,7 @@
 {{>partial_cmssidebar}}
 <div class="cmsSidebarRight appScope">
 	<div class="container">
+		<div class="font-1 pageTitle">Posts</div>
 		<ul class="list" v-show="posts.length>0" v-cloak style="display:none;">
 			<li class="cmsPostItem" v-for="item in posts">
 				<div class="postItemLeft">
@@ -9,8 +10,10 @@
 				<div class="postItemRight">
 					<h3 v-html="postTitle(item)"></h3>
 					<p v-html="postShortDescription(item)" class="postShortDescription"></p>
-					<label v-html="postPhysicFolderLabel(item)" class="postPhysicalPath" ></label>
-					<a class="btn" :href="postEditUrl(item)">Editar</a>
+					<label v-if="false" v-html="postPhysicFolderLabel(item)" class="postPhysicalPath" ></label>
+					<div>
+						<a class="btn" :href="postEditUrl(item)">Editar</a>
+					</div>
 				</div>
 			</li>
 		</ul>

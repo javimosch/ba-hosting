@@ -26,8 +26,9 @@ module.exports = function() {
 					},
 					watch: {
 						"item.html": function() {
-							if (!this.firstLoad) {
-								this.setHtml();
+							if (this.firstLoad) {
+								this.onDirtyData();
+								//this.setHtml();
 							}
 						},
 						"item.settings.title": function() {
@@ -41,6 +42,7 @@ module.exports = function() {
 						setTimeout(() => this.firstLoad = true, 3000);
 					},
 					async mounted() {
+						/*
 						this.quill = new Quill('#editor', {
 							theme: 'snow',
 							modules: {
@@ -52,7 +54,9 @@ module.exports = function() {
 							this.onDirtyData();
 						});
 						this.setHtml();
+						*/
 						this.startSaveInterval();
+						this.firstLoad = true;
 					},
 					computed: {
 						savedAtLabel() {
@@ -64,7 +68,7 @@ module.exports = function() {
 							},
 							postTitle() {
 								let item = this.item;
-								return item && item.settings && item.settings.post && item.settings.post.title || '(No title)';
+								return item && item.settings && item.settings && item.settings.title || '(No title)';
 							},
 							postThumbImage() {
 								let item = this.item;

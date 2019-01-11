@@ -1,4 +1,12 @@
 module.exports = {
+    STATE_ACTIVATED:{
+        en:"Activated",
+        es:"Activado"
+    },
+    STATE_CREATED:{
+        en:"Created",
+        es:"Creado"
+    },
     FEATURES_TITLE:{
         en:"Give your static website wings",
         es:"Dale alas a tus sitios web"
