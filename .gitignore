@@ -1,3 +1,6 @@
+docs
+!docs/style.css
+!docs/CNAME
 # Logs
 uploads/*
 .env

@@ -44,6 +44,28 @@ body, p, span{
     /* top: -5px; */
     padding-right: 5px;
 }
+
+.prCollectionName{
+    padding:0px;
+    margin:0px;
+}
+.prColBtn{
+    font-size:12px;
+    font-weight: bold;
+    cursor:pointer;
+}
+.prRecordForm{}
+.prColBtn:hover{
+    opacity: 0.7;
+}
+.prRecordFieldLabel{
+    display: block;
+    margin-top:10px;
+    font-weight: bold;
+    font-size:16px;
+    margin-bottom: 5px;
+}
+
 .featureTitle span{font-size: 18px;
     font-weight: bold;}
 
@@ -1313,7 +1335,7 @@ iframe {
     padding: 0px;
     display: block;
     font-size: 16px;
-    padding-left: 10px;
+    
 }
 .list li {
     min-width: 267px;

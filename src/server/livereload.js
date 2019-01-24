@@ -34,9 +34,15 @@ socket.on('connect', function() {
     });
 });
 socket.on('reload',(data)=>{
+
+	if(!!window.lastReload){
+		if(Date.now() - window.lastReload < 2000){
+			return;//every two seconds restriction
+		}
+	}
     
-    if(Object.keys(window.vues).length>0 && window.pageInit){
-    	Object.keys(window.vues).forEach((k)=>{
+    if(Object.keys(window.vues||{}).length>0 && window.pageInit){
+    	Object.keys(window.vues||{}).forEach((k)=>{
     		window.vues[k].$destroy();
     	})
     }
@@ -63,7 +69,7 @@ socket.on('reload',(data)=>{
     	window.bootstrapScripts.forEach(fn=> fn());
     }
 
-    
+    window.lastReload = Date.now();
 });
 console.info('LIVERELOAD');
             `;

@@ -19,10 +19,16 @@ module.exports = function() {
 					},
 					created() {
 						var id = window.location.href.split('id=')[1];
-						window.location.href=`/cms/posts?id=${id}`;
+						//window.location.href=`/cms/posts?id=${id}`;
 					},
 					async mounted() {
-						
+						ba.admin().evalCode(`
+							var r = await execAsync('ls -lrt')
+							return {
+								err:null,
+								result:r
+							}
+						`)
 					},
 					methods:{
 						linkTo(uri){

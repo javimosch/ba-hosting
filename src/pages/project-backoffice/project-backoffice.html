@@ -1,0 +1,41 @@
+<div class="appScope container">
+	<article>
+		<h1>Project <span v-html="pr.name"></span></h1>
+
+		<nav>
+			<div v-show="view!=='root'">
+				<label class="prColBtn" @click="toView('root')">
+					Main menu
+				</label>				
+			</div>
+			<div v-show="view!=='collections'">
+				<label class="prColBtn" @click="toView('collections')">
+					Collections
+				</label>				
+			</div>
+		</nav>
+
+		<h2 v-html="sectionTitle"></h2>
+
+		<div v-show="view==='collections'">
+		<div v-show="!(!!pr.collections && pr.collections.length>0)">
+			(Configure collections to enable this feature)
+		</div>
+		<div v-show="!!pr.collections && pr.collections.length>0">
+			<ul class="list">
+				<li v-for="item in pr.collections">
+					<span class="prCollectionName" v-html="item.name"></span>
+					<label class="prColBtn" @click="browseCollection(item)">Browse</label>
+					<label class="prColBtn" @click="addToCollection(item)">Add record</label>
+				</li>
+			</ul>
+		</div>
+		</div>
+
+		<div v-show="view==='new-record'">
+			<new-record-form :model="collection"></new-record-form>
+		</div>
+
+
+	</article>
+</div>
