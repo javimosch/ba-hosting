@@ -17,10 +17,12 @@
     <meta name="og:image" content="{{lang.BA_META_IMAGE}}" />
     <meta name="og:image:secure_url" content="{{lang.BA_META_IMAGE}}" />
     <meta property="og:site_name" content="MisitioBA" />
+
+    <title>{{lang.META_TITLE}}</title>
+
     <link rel="shortcut icon" href="/uploads/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/uploads/images/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" href="/uploads/images/favicon-32x32.png" sizes="32x32" />
-    <title>{{lang.META_TITLE}}</title>
     <link rel="stylesheet" type="text/css" href="/libs/noty.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     {{#ifNotEmpty pageLinks}}
@@ -28,13 +30,49 @@
     <link rel="stylesheet" type="text/css" href="{{this}}">
     {{/each}}
     {{/ifNotEmpty}}
-    <link rel="stylesheet" type="text/css" href="/styles.css?rnd={{#random}}{{/random}}">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+    
+    <div class="app">
+        {{#if (neq type 'admin')}}
+        {{> partial_header}}
+        {{else}}
+        {{> partial_header}}
+        {{/if}}
+        {{#if (neq type 'admin')}}
+        {{#if (eq wipMode true)}}
+        <div class="mainContent">
+            {{> page_wip}}
+        </div>
+        {{else}}
+        <div class="mainContent">
+            {{> (lookup . 'currentPage') }}
+        </div>
+        {{/if}}
+        {{else}}
+        <div class="mainContent">
+            {{> (lookup . 'currentPage') }}
+        </div>
+        {{/if}}
+        {{#if (neq type 'admin')}}
+        {{> partial_footer}}
+        {{else}}
+        {{> partial_footer}}
+        {{/if}}
+    </div>
+
+  
     <script type="text/javascript" src="/js/common-admin.js"></script>
     <script type="text/javascript" src="https://api.misitioba.com/misitioba-api-client.js"></script>
     <script type="text/javascript">
+    window.vues = {};
     window.SERVER = {
         API_URL: '{{API_URL}}',
         defaultCurrentPage: '{{defaultCurrentPage}}',
+        currentPage: '{{currentPage}}',
+        currentLanguage: '{{currentLanguage}}',
         updateCode: '{{updateCode}}',
         wipMode: '{{wipMode}}',
         lang: JSON.parse(`{{#stringify lang}}{{/stringify}}`),
@@ -49,40 +87,14 @@
         window.location.href = str;
     }
     </script>
-</head>
 
-<body>
-    {{#if (neq type 'admin')}}
-    {{> partial_header}}
-    {{else}}
-    {{> partial_header}}
-    {{/if}}
-    {{#if (neq type 'admin')}}
-    {{#if (eq wipMode true)}}
-    <div class="mainContent">
-        {{> page_wip}}
-    </div>
-    {{else}}
-    <div class="mainContent">
-        {{> (lookup . 'currentPage') }}
-    </div>
-    {{/if}}
-    {{else}}
-    <div class="mainContent">
-        {{> (lookup . 'currentPage') }}
-    </div>
-    {{/if}}
-    {{#if (neq type 'admin')}}
-    {{> partial_footer}}
-    {{else}}
-    {{> partial_footer}}
-    {{/if}}
     <script type="text/javascript" src="/libs/jquery-3.3.1.min.js"></script>
     {{#if (eq NODE_ENV 'production')}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
     {{else}}
     <script type="text/javascript" src="/libs/vue.js"></script>
     {{/if}}
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script type="text/javascript" src='/libs/vue-components.js'></script>
     <script type="text/javascript" src="/libs/moment.js"></script>
     <script type="text/javascript" src="/libs/noty.min.js"></script>
@@ -103,6 +115,7 @@
         {{# if (typeIs init 'function') }} 
             {{# toString init }}{{/toString}}
                 if (!!init) {
+                    window.pageInit = init;
                     init();
                 } 
         {{/if}}

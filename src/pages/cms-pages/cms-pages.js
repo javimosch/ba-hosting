@@ -1,25 +1,25 @@
 module.exports = function() {
 	return {
-		name: 'posts',
+		name: 'pages',
 		enabled: true,
 		path: 'cms',
 		context: {
 			head:{
-				title:'CMS Posts'
+				title:'CMS Pages'
 			},
 			pageScripts:['/js/cms-sidebar.js'],
 			init: function init() {
 				
-				vues['cmsPosts']=new Vue({
+				vues['cmsPages']=new Vue({
 					el: '.appScope',
-					name: 'cmsPosts',
+					name: 'cmsPages',
 					data() {
 						return {
-							posts:[]	
+							items:[]	
 						}
 					},
 					async created() {
-						this.posts = await ba.cms().posts();
+						this.items = await ba.cms().pages();
 					},
 					async mounted() {
 						
@@ -29,7 +29,7 @@ module.exports = function() {
 							return item && `Physical location: ${item.physicRelativePath}`;
 						},
 						postTitle(item){
-							return item && item.settings && item.settings && item.settings.title || '(No title)';
+							return item && item.name
 						},
 						postThumbImage(item){
 							return item && item.settings && item.settings.post && item.settings.post.thumbImage || 'https://via.placeholder.com/150'
@@ -39,7 +39,7 @@ module.exports = function() {
 						},
 						postEditUrl(item){
 							let projectId=(new URL(window.location.href)).searchParams.get("id");
-							return `/cms/post-details?id=${projectId}&postId=${item.name}`;
+							return `/cms/page-details?id=${projectId}&postId=${item.name}`;
 						}
 					},
 					computed: {

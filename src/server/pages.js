@@ -3,9 +3,32 @@ const sander = require('sander');
 const Handlebars = require('handlebars');
 const dJSON = require('dirty-json');
 const reload = require('require-reload')(require);
+const argv = require('yargs').argv;
+const livereload = require('./livereload');
 
+function injectHtml(html) {
+	var result = {};
+	if (process.env.NODE_ENV!=='development') {
+		const cheerio = require('cheerio')
+		const $ = cheerio.load(html)
+		result.app = $('.app').html();
+		result.head = $('head').html();
+		$('body').html($('body').html() + `
+			<script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.2.0/dist/socket.io.slim.min.js"></script>
+			<script>
+				fetch('/livereload.js?page='+window.SERVER.currentPage+'&language='+window.SERVER.currentLanguage).then(r=>r.text()).then(data=>{
+					eval(data);
+				})
+			</script>
+		`);
+		html = $.html()
+	}
+	result.html = html;
+	return result;
+}
 
 module.exports = {
+	injectHtml,
 	compile: (options, config) => {
 		var srcPath = path.join(process.cwd(), 'src');
 		var srcFile = name => path.join(srcPath, name);
@@ -45,9 +68,9 @@ module.exports = {
 					details: err.stack
 				});
 			}
-			
-			if(!pageConfig.name){
-				throw new Error('Invalid page name at '+pageConfigPath);
+
+			if (!pageConfig.name) {
+				throw new Error('Invalid page name at ' + pageConfigPath);
 			}
 
 			var normalizeName = (name, isPageFile = false) => {
@@ -76,15 +99,15 @@ module.exports = {
 				context.currentLanguage = context.lang[options.language];
 				context.currentPage = pageName;
 				context.langPath = options.language != config.defaultLanguage ? `${options.language}/` : ``;
-				var html = template(Object.assign({}, context, pageConfig.context || {}));
+				let combinedContext = Object.assign({}, context, pageConfig.context || {});
+				var html = template(combinedContext);
 				var writePath = path.join(basePath, pageConfig.path || '', pageConfig.name.toLowerCase(), 'index.html');
-				
-				//console.log('write', writePath)
-				
-				sander.writeFileSync(writePath, html);
+				let result = injectHtml(html);
+				livereload.addPage(context.currentPage, result, context.currentLanguage, combinedContext);
+				sander.writeFileSync(writePath, result.html);
 			})
 		});
 
-		writeFns.forEach(fn=>fn());
+		writeFns.forEach(fn => fn());
 	}
 };

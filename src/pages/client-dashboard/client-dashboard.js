@@ -106,7 +106,11 @@ module.exports = function() {
 							}
 						},
 						serviceState(item) {
-							return item.state.charAt(0).toUpperCase() + item.state.substring(1);
+							var label = {
+								activated: SERVER.lang.STATE_ACTIVATED,
+								created: SERVER.lang.STATE_CREATED
+							};
+							return label[item.state];
 						},
 						openService(item) {
 							if (item.state === 'activated') {
